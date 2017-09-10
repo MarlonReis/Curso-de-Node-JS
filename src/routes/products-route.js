@@ -1,8 +1,11 @@
 'use strict'
 
+const express = require('express');
+const router = express.Router();
+
 const controller = require('../controller/product-controller');
 
-module.exports = (router) => {
+module.exports = () => {
 
     router.get('/',controller.get);
     

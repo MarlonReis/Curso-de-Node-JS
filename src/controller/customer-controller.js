@@ -29,7 +29,7 @@ exports.getCustomerFindById = async (req, res, next) => {
     }
 }
 
-exports.save = async (req, res, next) => {
+exports.save = async(req, res, next) => {
     try {
         let customer = await customerRepository.create(req.body);
         res.status(200).send(customer);

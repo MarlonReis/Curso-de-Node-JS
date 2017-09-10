@@ -1,7 +1,5 @@
 'use strict';
 
-const produtoDao = require('../model/product-dao');
-
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 const repository = require('../repository/producty-repositorio');

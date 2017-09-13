@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const controller = require('../controller/customer-controller');
+const authService = require('../service/auth.service');
 
 module.exports = () => {
 
@@ -11,7 +12,9 @@ module.exports = () => {
 
     router.post('/', controller.save);
 
-    router.post('/authenticate', controller.authenticate);    
+    router.post('/authenticate', controller.authenticate);
+
+    router.post('/refresh-token', authService.authrize, controller.reflashToken);
 
     router.get('/:email', controller.getCustomerFindByEmail);
 

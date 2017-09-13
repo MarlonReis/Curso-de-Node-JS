@@ -2,15 +2,17 @@
 
 const jwt = require('jsonwebtoken');
 
-exports.gerateToken = async (data) => jwt.sign(data, global.SALT_KEY, { expiresIn: '1h'});
+exports.gerateToken = async (data) => jwt.sign(data, global.SALT_KEY, { expiresIn: '1h' });
 
 
 exports.desencriptaToken = async (token) => await jwt.verify(token, global.SALT_KEY, {
     algorithm: 'RS512'
 });
 
+exports.getHequestToken = (req) => (req.body.token || req.query.token || req.headers['x-access-token']);
+
 exports.authrize = (req, res, next) => {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    const token = this.getHequestToken(req);
 
     if (token) {
         jwt.verify(token, global.SALT_KEY, (error, decoded) => {

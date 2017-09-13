@@ -25,3 +25,5 @@ exports.autenticate = async (data) => Customer.findOne({
 });
 
 
+exports.getUserById = async (id) => await Customer.findById(id);
+

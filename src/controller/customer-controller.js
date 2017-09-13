@@ -73,6 +73,28 @@ exports.authenticate = async (req, res, next) => {
         });
 
     } else {
-        res.status(200).send({ message: 'Usuário ou senha invalida!' });
+        res.status(401).send({ message: 'Usuário ou senha invalida!' });
+    }
+}
+
+exports.reflashToken = async (req, res, next) => {
+    const token = authService.getHequestToken(req);
+    const data  = authService.desencriptaToken(token);
+
+    const customer = await customerRepository.getUserById(data.id);
+
+    if (customer) {
+        const tokenData = await gerateToken(customer);
+
+        res.status(200).send({
+            token: tokenData,
+            data: {
+                name: customer.name,
+                email: customer.email
+            }
+        });
+
+    } else {
+        res.status(401).send({ message: 'Usuário ou senha invalida!' });
     }
 }

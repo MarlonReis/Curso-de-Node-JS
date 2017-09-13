@@ -19,3 +19,9 @@ exports.create = async (data) => {
     return await customer.save();
 }
 
+exports.autenticate = async (data) => Customer.findOne({
+    email: data.email,
+    password: data.password
+});
+
+

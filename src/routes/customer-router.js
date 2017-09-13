@@ -11,6 +11,8 @@ module.exports = () => {
 
     router.post('/', controller.save);
 
+    router.post('/authenticate', controller.authenticate);    
+
     router.get('/:email', controller.getCustomerFindByEmail);
 
     router.get('/:id', controller.getCustomerFindById);

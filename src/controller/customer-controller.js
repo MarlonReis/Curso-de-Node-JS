@@ -1,6 +1,7 @@
 'use strict';
 
 const customerRepository = require('../repository/customer-repository');
+const emailService = require('../service/email.service');
 
 exports.getCustomerFindAll = async (req, res, next) => {
     try {
@@ -29,9 +30,13 @@ exports.getCustomerFindById = async (req, res, next) => {
     }
 }
 
-exports.save = async(req, res, next) => {
+exports.save = async (req, res, next) => {
     try {
         let customer = await customerRepository.create(req.body);
+        emailService.send(
+            'marlon-reis91@hotmail.com', customer.email,
+            'Bem vindo a Node Store!',
+            `Olá, ${customer.name} seja bem vindo!`);
         res.status(200).send(customer);
     } catch (err) {
         res.status(500).send(err);

@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const router = express.Router();
-
+const config = require('./config');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://marlonreis:marlonreis@ds052649.mlab.com:52649/curso_balta_node_store');
+mongoose.connect(config.connectionString);
 
 //Carregar as module
 const ProductyDao = require('./model/product-dao');
